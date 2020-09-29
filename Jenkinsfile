@@ -82,28 +82,29 @@ pipeline{
             terraform apply --auto-approve 
             cd -
        '''
+   
 }
 }
 }
 
-   stage("terraform_destroy"){
-    //terraform destroy
-    when {
-        //only terraform apply if a "apply" is requested
+stage("terraform_apply"){
+    //terraform apply
+     when {
+        //only terraform apply if a "destroy" is requested
         expression { params.REQUESTED_ACTION == 'destroy'}
 }
-
-      steps{
+     steps{
       script{
        sh '''
-           cd infra
-           terraform destroy --auto-approve
-           cd -
-       '''
+            cd infra
+            terraform destroy --auto-approve
+            cd -
+       '''                                                
+
 }
 }
 }
-   
+
 
 }
 } 

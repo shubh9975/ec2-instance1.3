@@ -79,7 +79,7 @@ pipeline{
       script{
        sh '''
             cd infra
-            terraform apply --auto-approve 
+            terraform apply -state-out=terraform.tfstate --auto-approve 
             cd -
        '''
    
@@ -97,7 +97,7 @@ pipeline{
       script{
        sh '''
             cd infra
-            terraform destroy --auto-approve
+            terraform destroy -state-out=terraform.tfstate --auto-approve
             cd -
        '''                                                
 

@@ -92,7 +92,7 @@ pipeline{
      when {
         //only terraform destroy if a "destroy" is requested
         expression { params.REQUESTED_ACTION == 'destroy'}
-
+}
      steps{
       script{
        sh '''
@@ -100,7 +100,7 @@ pipeline{
             terraform destroy --auto-approve
             cd -
        '''                                                
-}
+
 }
 }
 }

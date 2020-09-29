@@ -3,7 +3,7 @@ pipeline{
 
   parameters {
    choice(
-       choices: ['apply' , 'destory'],
+       choices: ['apply' , 'destroy'],
        description: '',
        name: 'REQUESTED_ACTION')
   
@@ -90,11 +90,10 @@ pipeline{
     //terraform destroy
     when {
         //only terraform apply if a "apply" is requested
-        expression { params.REQUESTED_ACTION == 'destory'}
+        expression { params.REQUESTED_ACTION == 'destroy'}
 }
 
-    
-     steps{
+      steps{
       script{
        sh '''
            cd infra

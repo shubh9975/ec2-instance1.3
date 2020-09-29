@@ -1,7 +1,7 @@
 pipeline{
   agent any
 
-  paeameters {
+  parameters {
    choice(
        choices: ['apply' , 'destory'],
        description: '',

@@ -1,5 +1,13 @@
 pipeline{
-  agent any  
+  agent any
+
+  paeameters {
+   choice(
+       choices: ['apply' , 'destory'],
+       description: '',
+       name: 'REQUESTED_ACTION')
+  
+}  
   stages {
    stage("Opening"){
          steps{
@@ -63,6 +71,10 @@ pipeline{
  
    stage("terraform_apply"){
     //terraform apply
+     when {
+        //only terraform apply if a "apply" is requested
+        expression { params.REQUESTED_ACTION == 'apply'}
+}
      steps{
       script{
        sh '''
@@ -73,6 +85,27 @@ pipeline{
 }
 }
 }
+
+   stage("terraform_destroy"){
+    //terraform destroy
+    when {
+        //only terraform apply if a "apply" is requested
+        expression { params.REQUESTED_ACTION == 'destory'}
+}
+
+    
+     steps{
+      script{
+       sh '''
+           cd infra
+           terraform destroy --auto-approve
+           cd -
+       '''
+}
+}
+}
+   
+
 }
 } 
 

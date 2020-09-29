@@ -8,7 +8,7 @@ pipeline{
        name: 'REQUESTED_ACTION')
   
 }  
-  stages {
+  stages{
    stage("Opening"){
          steps{
             //Welcome message

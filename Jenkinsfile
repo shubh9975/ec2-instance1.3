@@ -87,7 +87,7 @@ pipeline{
 }
 }
 
-stage("terraform_apply"){
+   stage("terraform_apply"){
     //terraform apply
      when {
         //only terraform apply if a "destroy" is requested

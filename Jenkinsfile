@@ -87,10 +87,10 @@ pipeline{
 }
 }
 
-   stage("terraform_apply"){
-    //terraform apply
+   stage("terraform_destroy"){
+    //terraform destroy
      when {
-        //only terraform apply if a "destroy" is requested
+        //only terraform destroy if a "destroy" is requested
         expression { params.REQUESTED_ACTION == 'destroy'}
 }
      steps{

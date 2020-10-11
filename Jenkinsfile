@@ -4,8 +4,8 @@ pipeline{
   parameters {
    choice(
        choices: ['apply' , 'destroy'],
-       description: '',
-       name: 'REQUESTED_ACTION')
+       description: 'Perform action on infrastructure!',
+       name: 'ACTION')
   
 }  
   stages{
@@ -73,13 +73,13 @@ pipeline{
     //terraform apply
      when {
         //only terraform apply if a "apply" is requested
-        expression { params.REQUESTED_ACTION == 'apply'}
+        expression { params.ACTION == 'apply'}
 }
      steps{
       script{
        sh '''
             cd infra
-            terraform apply --auto-approve 
+            terraform apply -state-out=terraform.tfstate --auto-approve 
             cd -
        '''
    
@@ -91,13 +91,13 @@ pipeline{
     //terraform destroy
      when {
         //only terraform destroy if a "destroy" is requested
-        expression { params.REQUESTED_ACTION == 'destroy'}
+        expression { params.ACTION == 'destroy'}
 }
      steps{
       script{
        sh '''
             cd infra
-            terraform destroy --auto-approve
+            terraform destroy -state-out=terraform.tfstate --auto-approve
             cd -
        '''                                                
 
